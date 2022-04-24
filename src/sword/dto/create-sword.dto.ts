@@ -68,7 +68,7 @@ export class CreateSwordDto {
   swordhability: string;
 
   /**
-   * jogo da espada
+   * jogo/anime que a espada pertence
    *
    * @example 'Sao'
    */

@@ -2,8 +2,7 @@ import { PrismaService } from '../prisma.service';
 import {
   ConflictException,
   Injectable,
-  NotFoundException,
-  UnauthorizedException,
+  NotFoundException
 } from '@nestjs/common';
 import { CreateSwordDto } from './dto/create-sword.dto';
 import { Sword } from '@prisma/client';
