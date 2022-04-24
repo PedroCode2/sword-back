@@ -23,8 +23,8 @@ model User {
 
 model Sword {
   id              Int      @id @default(autoincrement())
-  name            String
-  type            String   @unique
+  name            String   @unique
+  type            String
   characterswords String
   swordweigth     Int
   swordwidth      Int
