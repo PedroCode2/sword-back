@@ -1,4 +1,4 @@
-import { IsAlpha, IsEmail, IsNotEmpty, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from 'src/auth/enums/role.enum';
 
@@ -8,7 +8,7 @@ export class CreateUserDto {
    *
    * @example 'Pedro Henrique'
    */
-  @IsAlpha()
+  @IsString()
   @IsNotEmpty({ message: 'Por favor insira um nome' })
   @Length(3, 150)
   @ApiProperty()
@@ -19,7 +19,7 @@ export class CreateUserDto {
    *
    * @example 'Kansk'
    */
-  @IsAlpha()
+  @IsString()
   @IsNotEmpty({ message: 'Por favor insira um nome' })
   @Length(3, 150)
   @ApiProperty()
