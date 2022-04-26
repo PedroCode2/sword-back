@@ -25,9 +25,10 @@ model Sword {
   id              Int      @id @default(autoincrement())
   name            String   @unique
   type            String
+  details         String
   characterswords String
-  swordweigth     Int
-  swordwidth      Int
+  swordweigth     String
+  swordwidth      String
   swordhability   String
   swordgame       String
   createdAt       DateTime @default(now())

@@ -20,8 +20,8 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 export class UserController {
   constructor(private readonly service: UserService) {}
 
-  // @Roles(Role.ADMIN)
-  // @UseGuards(AuthGuard(), RolesGuard)
+  @Roles(Role.ADMIN)
+  @UseGuards(AuthGuard(), RolesGuard)
   @Post('/create')
   @ApiOperation({
     summary: 'Cadastrar um usuário',
@@ -31,8 +31,8 @@ export class UserController {
     return this.service.create(data);
   }
 
-  @Roles(Role.ADMIN)
-  @UseGuards(AuthGuard(), RolesGuard)
+  // @Roles(Role.ADMIN)
+  // @UseGuards(AuthGuard(), RolesGuard)
   @Get('/find')
   @ApiOperation({
     summary: 'Buscar todos os usuários',

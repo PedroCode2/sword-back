@@ -7,10 +7,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateSwordDto } from './dto/create-sword.dto';
-import { User,Sword } from '@prisma/client';
+import { Sword } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import AuthUser from 'src/auth/decorators/auth-user.decorator';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
@@ -34,7 +33,7 @@ export class SwordController {
 
   @Roles(Role.ADMIN, Role.USER)
   @UseGuards(AuthGuard(), RolesGuard)
-  @Get()
+  @Get('/find')
   @ApiOperation({
     summary: 'Buscar todos as espadas cadastradas',
   })
@@ -45,12 +44,12 @@ export class SwordController {
 
   @Roles(Role.ADMIN, Role.USER)
   @UseGuards(AuthGuard(), RolesGuard)
-  @Get('/:name')
+  @Get('find/:name')
   @ApiOperation({
     summary: 'Buscar uma espada pelo nome',
   })
   @ApiBearerAuth()
-  findOne(@Param('code') code: string): Promise<Sword> {
-    return this.service.findOne(code);
+  findOne(@Param('name') name: string): Promise<Sword> {
+    return this.service.findOne(name);
   }
 }
