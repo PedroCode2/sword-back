@@ -42,7 +42,7 @@ export class CreateUserDto {
   /**
    * Tipo do usuario
    *
-   * @example 'Admin/User'
+   * @example 'admin/user'
    */
   @ApiProperty()
   role: Role;

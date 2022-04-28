@@ -58,4 +58,56 @@ export class UserService {
     return user
   }
 
+  async addFav(user: User, swordId:number){
+    const sword = await this.db.sword.findUnique({
+      where: { id: swordId},
+    })
+    
+    if(!sword){
+      throw new NotFoundException('Sword não encontrada')
+    }
+    const userLikedSword = await this.db.user.findUnique({
+      where: {id: user.id},
+      include: {
+        swords: true
+      },
+    });
+
+    const userSwordList = userLikedSword.swords;
+
+    let foundSword = false 
+
+    userSwordList.map((sword) => {
+      if(sword.id === swordId){
+        foundSword = true
+      }
+    });
+
+    if (foundSword) {
+      await this.db.user.update({
+        where: { id: user.id},
+        data: {
+          swords: {
+            disconnect: {
+              id: sword.id
+            }
+          }
+        }
+      })
+      return {message: 'Product Remove From List'}
+    }else {
+      await this.db.user.update({
+        where: {id: user.id},
+        data:{
+          swords:{
+            connect:{
+              id: sword.id,
+            }
+          }
+        }
+      })
+      return { message: 'Product Add to your list'}
+    }
+  }
+
 }

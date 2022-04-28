@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Patch,
   Body,
   Param,
   UseGuards,
@@ -14,14 +15,15 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import AuthUser from 'src/auth/decorators/auth-user.decorator'
 
 @ApiTags('Users')
 @Controller('users')
 export class UserController {
   constructor(private readonly service: UserService) {}
 
-  @Roles(Role.ADMIN)
-  @UseGuards(AuthGuard(), RolesGuard)
+  // @Roles(Role.ADMIN)
+  // @UseGuards(AuthGuard(), RolesGuard)
   @Post('/create')
   @ApiOperation({
     summary: 'Cadastrar um usuário',
@@ -31,8 +33,8 @@ export class UserController {
     return this.service.create(data);
   }
 
-  // @Roles(Role.ADMIN)
-  // @UseGuards(AuthGuard(), RolesGuard)
+  @Roles(Role.ADMIN)
+  @UseGuards(AuthGuard(), RolesGuard)
   @Get('/find')
   @ApiOperation({
     summary: 'Buscar todos os usuários',
@@ -51,5 +53,14 @@ export class UserController {
   @ApiBearerAuth()
   findOne(@Param('id') id: number): Promise<any> {
     return this.service.findOne(+id);
+  }
+  @UseGuards(AuthGuard())
+  @Patch('addfav/:id')
+  @ApiOperation({
+    summary: 'add a item in favorite',
+  })
+  @ApiBearerAuth()
+  addFav(@AuthUser() user: User, @Param('id') swordId: number) {
+    return this.service.addFav(user, swordId);
   }
 }
