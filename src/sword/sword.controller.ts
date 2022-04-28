@@ -31,8 +31,6 @@ export class SwordController {
     return this.service.create(data);
   }
 
-  @Roles(Role.ADMIN, Role.USER)
-  @UseGuards(AuthGuard(), RolesGuard)
   @Get('/find')
   @ApiOperation({
     summary: 'Buscar todos as espadas cadastradas',
@@ -42,8 +40,6 @@ export class SwordController {
     return this.service.findAll();
   }
 
-  @Roles(Role.ADMIN, Role.USER)
-  @UseGuards(AuthGuard(), RolesGuard)
   @Get('find/:name')
   @ApiOperation({
     summary: 'Buscar uma espada pelo nome',
@@ -51,5 +47,13 @@ export class SwordController {
   @ApiBearerAuth()
   findOne(@Param('name') name: string): Promise<Sword> {
     return this.service.findOne(name);
+  }
+  @Get('find/:id')
+  @ApiOperation({
+    summary: 'Buscar uma espada pelo id',
+  })
+  @ApiBearerAuth()
+  findid(@Param('name') id: number): Promise<Sword> {
+    return this.service.findUnique(id);
   }
 }

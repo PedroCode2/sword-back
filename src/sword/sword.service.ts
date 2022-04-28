@@ -39,4 +39,14 @@ export class SwordService {
     }
     return sword
   }
+
+  async findUnique (id: number): Promise<Sword> {
+    const product = await this.db.sword.findUnique({
+        where: {id}
+    })
+    if(!product){
+        throw new NotFoundException('Id Not Found')
+    }
+    return product
+}
 }

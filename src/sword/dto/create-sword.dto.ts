@@ -14,6 +14,16 @@ export class CreateSwordDto {
   name: string;
 
   /**
+   * Url da Imagem
+   *
+   * @example 'https://i.pinimg.com/originals/33/10/dd/3310ddc6a803e5d1328f7b6515a0eb3f.jpg'
+   */
+  @IsString()
+  @IsNotEmpty({ message: 'PorFavor insira um nome' })
+  @ApiProperty()
+  swordImage:string
+
+  /**
    * tipo
    *
    * @example 'Larger'

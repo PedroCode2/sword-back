@@ -19,11 +19,13 @@ model User {
   role      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  swords    Sword[]
 }
 
 model Sword {
   id              Int      @id @default(autoincrement())
   name            String   @unique
+  swordImage      String
   type            String
   details         String
   characterswords String
@@ -33,4 +35,5 @@ model Sword {
   swordgame       String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  users           User[]
 }
