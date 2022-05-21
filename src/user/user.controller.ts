@@ -17,8 +17,8 @@ import { Role } from 'src/auth/enums/role.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import AuthUser from 'src/auth/decorators/auth-user.decorator'
 
-@ApiTags('Users')
-@Controller('users')
+@ApiTags('User')
+@Controller('user')
 export class UserController {
   constructor(private readonly service: UserService) {}
 
